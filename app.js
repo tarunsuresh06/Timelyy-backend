@@ -39,26 +39,22 @@ const initializeDBAndServer = async () => {
 initializeDBAndServer();
 
 // JwtToken Verification
-const authenticateToken = (request, response, next) => {
-  const { tweet } = request.body;
-  const { tweetId } = request.params;
+const authenticateToken = (req, res, next) => {
   let jwtToken;
-  const authHeader = request.headers["authorization"];
+  const authHeader = req.headers["authorization"];
   if (authHeader !== undefined) {
     jwtToken = authHeader.split(" ")[1];
   }
   if (jwtToken === undefined) {
-    response.status(401);
-    response.send({ error_msg: "Authorization Header is undefined" });
+    res.status(401);
+    res.send({ error_msg: "Authorization Header is undefined" });
   } else {
     jwt.verify(jwtToken, "ADMIN_123", async (error, payload) => {
       if (error) {
-        response.status(401);
-        response.send({ error_msg: "Invalid JWT Token" });
+        res.status(401);
+        res.send({ error_msg: "Invalid JWT Token" });
       } else {
-        request.payload = payload;
-        request.tweetId = tweetId;
-        request.tweet = tweet;
+        req.payload = payload;
         next();
       }
     });
@@ -121,16 +117,84 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile/:email", async (req, res) => {
-  const { email } = req.params;
+app.get("/profile/student", authenticateToken, async (req, res) => {
+  const { payload } = req;
+  const { email } = payload;
 
-  getAllUsersQuery = `
-    SELECT * FROM user
-    WHERE email = '${email}';
+  const getStudentDataQuery = `
+    SELECT * FROM student
+    WHERE student_email='${email}';
   `;
 
-  const user = await db.get(getAllUsersQuery);
-  res.send({ user });
+  const studentData = await db.get(getStudentDataQuery);
+  res.send({ studentData });
+  console.log(studentData);
+});
+
+app.get("/profile/staff", authenticateToken, async (req, res) => {
+  const { payload } = req;
+  const { email } = payload;
+
+  const getStaffDataQuery = `
+    SELECT * FROM staff
+    WHERE staff_email='${email}';
+  `;
+
+  const staffData = await db.get(getStaffDataQuery);
+  res.send({ staffData });
+});
+
+// Add Student Data API
+app.post("/profile/student", async (req, res) => {
+  const { studentName, studentRollNo, studentEmail, studentDepartment } =
+    req.body;
+
+  const getStudentDataQuery = `SELECT * FROM student WHERE student_email = "${studentEmail}";`;
+
+  const studentDetails = await db.get(getStudentDataQuery);
+
+  if (studentDetails === undefined) {
+    const createStudentQuery = `INSERT INTO student(student_name, roll_number, student_email, department)
+      VALUES("${studentName}", "${studentRollNo}", "${studentEmail}", "${studentDepartment}");`;
+
+    const studentData = await db.run(createStudentQuery);
+    res.send({ studentData });
+  } else {
+    res.send({ error_msg: "student already added" });
+  }
+});
+
+// Add Staff Data API
+app.post("/profile/staff", async (req, res) => {
+  const { teacherName, teacherEmployeeNo, teacherEmail, teacherDepartment } =
+    req.body;
+
+  const getTeacherDataQuery = `SELECT * FROM staff WHERE staff_email = "${teacherEmail}";`;
+
+  const teacherDetails = await db.get(getTeacherDataQuery);
+
+  if (teacherDetails === undefined) {
+    const createTeacherQuery = `INSERT INTO staff(staff_name, employee_number, staff_email, department)
+      VALUES("${teacherName}", "${teacherEmployeeNo}", "${teacherEmail}", "${teacherDepartment}");`;
+
+    const teacherData = await db.run(createTeacherQuery);
+    res.send({ teacherData });
+  } else {
+    res.send({ error_msg: "teacher already added" });
+  }
+});
+
+app.get("/profile/staff", authenticateToken, async (req, res) => {
+  const { payload } = req;
+  const { email } = payload;
+
+  getStaffDataQuery = `
+    SELECT * FROM staff
+    WHERE staff_email='${email}';
+  `;
+
+  const staffData = await db.get(getStaffDataQuery);
+  res.send({ staffData });
 });
 
 app.get("/", async (req, res) => {
