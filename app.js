@@ -253,9 +253,7 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
 
   const studentAttendance = await db.get(getStudentAttendanceQuery);
 
-  const timeStamp = studentAttendance.time_stamp;
-
-  if (timeStamp === undefined) {
+  if (studentAttendance === undefined) {
     const { student_name, student_id, semester } = await db.get(
       getStudentDetailsQuery
     );
