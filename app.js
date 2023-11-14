@@ -15,7 +15,6 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 const sendToDb = require("./sendToDb");
-const { log } = require("console");
 
 const dbPath = path.join(__dirname, "timelyy.db");
 
