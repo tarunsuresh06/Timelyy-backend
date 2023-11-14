@@ -236,10 +236,41 @@ app.post("/staff-attendance", authenticateToken, async (req, res) => {
   res.send({ staff_attendance: responseData });
 });
 
+// Create a New Student Attendance API (QR Format Time_Stamp - Sub_Code - Sub_Name - Staff_Id - Staff_Name - Department - taken_hours)
+app.post("/student-attendance", authenticateToken, async (req, res) => {
+  const {
+    department,
+    time_stamp,
+    subject_code,
+    subject_name,
+    taken_hours,
+    subject_semester,
+  } = req.body;
+  const { email } = req.payload;
+
+  const getStudentDetailsQuery = `SELECT student_name, student_id, semester FROM student WHERE student_email='${email}';`;
+
+  const { student_name, student_id, semester } = await db.get(
+    getStudentDetailsQuery
+  );
+
+  if (subject_semester === semester) {
+    const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
+  VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
+
+    const dbResponse = await db.run(createStudentAttendanceQuery);
+
+    res.send({ lastID: dbResponse.lastID });
+  } else {
+    res.status(402);
+    res.send({ err_msg: "Invalid Attendance" });
+  }
+});
+
 //Testing GET API
 app.get("/", async (req, res) => {
   getAllUsersQuery = `
-    SELECT * FROM student;
+    SELECT * FROM staffs_attendance;
   `;
 
   const userArray = await db.all(getAllUsersQuery);

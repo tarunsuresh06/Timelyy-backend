@@ -2,7 +2,7 @@ const csv = require("csvtojson");
 const path = require("path");
 
 const sendToDb = () => {
-  const csvFilePath = path.join(__dirname, "mech.csv");
+  const csvFilePath = path.join(__dirname, "subject_data.csv");
   return csv()
     .fromFile(csvFilePath)
     .subscribe((json) => {

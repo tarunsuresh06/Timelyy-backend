@@ -1,0 +1,451 @@
+subject_code,subject_name,semester,department
+HS19151,Technical English,1,Robotics and Automation
+MA19151,Algebra and Calculus,1,Robotics and Automation
+GE19101,Engineering Graphics,1,Robotics and Automation
+PH19141,Physics of Materials,1,Robotics and Automation
+GE19121,Engineering Practices - Civil and Mechanical,1,Robotics and Automation
+MC19101,Environmental Science and Engineering,1,Robotics and Automation
+MA19251,Differential Equations and Vector Calculus,2,Robotics and Automation
+GE19201,Engineering Mechanics,2,Robotics and Automation
+CY19241,Engineering Chemistry,2,Robotics and Automation
+GE19141,Programming using C,2,Robotics and Automation
+EE19241,Basic Electrical Engineering,2,Robotics and Automation
+MT19221,Computer Aided Drawing Laboratory,2,Robotics and Automation
+GE19122,Engineering PracticesElectrical and Electronics,2,Robotics and Automation
+MC19102,Indian Constitution and Freedom Movement,2,Robotics and Automation
+MA19355,Transforms and Applications,3,Robotics and Automation
+GE19301,Life Science for Engineers,3,Robotics and Automation
+MT19301,Analog Devices and Circuits,3,Robotics and Automation
+MT19302,Digital System Design,3,Robotics and Automation
+ME19303,Kinematics of Machinery,3,Robotics and Automation
+RO19301,Mechanics of Materials,3,Robotics and Automation
+MT19311,Digital System Design laboratory,3,Robotics and Automation
+RO19311,Mechanics of Materials laboratory,3,Robotics and Automation
+MC19301,Essence of Indian Traditional Knowledge,3,Robotics and Automation
+MA19455,Statistics and Numerical Methods,4,Robotics and Automation
+MT19402,Microcontrollers and Embedded Systems,4,Robotics and Automation
+RO19401,Basics of Robotics,4,Robotics and Automation
+RO19402,Manufacturing Science,4,Robotics and Automation
+CS19342,Object Oriented Programming Paradigm,4,Robotics and Automation
+ME19312,Manufacturing Technology laboratory,4,Robotics and Automation
+MT19411,Microprocessors and Microcontrollers for Automation Laboratory,4,Robotics and Automation
+GE19421,Soft skills – I,4,Robotics and Automation
+RO19501,Fluid Power Systems,5,Robotics and Automation
+RO19502,Dynamics and Design of Machinery,5,Robotics and Automation
+RO19503,Mechatronics and Manufacturing Automation,5,Robotics and Automation
+MT19503,System Dynamics and Control,5,Robotics and Automation
+RO111,Open Elective – I,5,Robotics and Automation
+RO112,Professional Elective -I,5,Robotics and Automation
+RO19511,Robotics laboratory,5,Robotics and Automation
+RO19512,Fluid Power Systems laboratory,5,Robotics and Automation
+GE19521,Soft Skills – II,5,Robotics and Automation
+RO19641,CAD/CAM,6,Robotics and Automation
+RO19642,Machine Vision systems in Robotics,6,Robotics and Automation
+RO19601,Mobile Robots,6,Robotics and Automation
+RO19602,Resource Management Techniques,6,Robotics and Automation
+RO113,Professional Elective - II,6,Robotics and Automation
+RO114,Professional Elective - III,6,Robotics and Automation
+GE19621,Problem solving Techniques,6,Robotics and Automation
+RO19701,AI in Robotics,7,Robotics and Automation
+RO19702,Computer Integrated Manufacturing,7,Robotics and Automation
+RO19703,Material Handling system,7,Robotics and Automation
+GE19304,Fundamentals of Management for Engineers,7,Robotics and Automation
+RO115,Professional Elective - IV,7,Robotics and Automation
+RO116,Open Elective – II,7,Robotics and Automation
+RO19711,Innovation and Design thinking for Robotics and Automation,7,Robotics and Automation
+RO19721,Project Work - Phase 1,7,Robotics and Automation
+RO117,Professional Elective - V,8,Robotics and Automation
+RO118,Professional Elective – VI,8,Robotics and Automation
+RO19811,Project Work- Phase II,8,Robotics and Automation
+HS19151,Technical English,1,Mechanical
+MA19151,Algebra and Calculus,1,Mechanical
+GE19101,Engineering Graphics,1,Mechanical
+PH19141,Physics of Materials,1,Mechanical
+GE19121,Engineering Practices - Civil and Mechanical,1,Mechanical
+MC19101,Environmental Science and Engineering,1,Mechanical
+MA19251,Differential Equations and Vector Calculus,2,Mechanical
+GE19201,Engineering Mechanics,2,Mechanical
+CY19241,Engineering Chemistry,2,Mechanical
+GE19141,Programming using C,2,Mechanical
+ME19201,Manufacturing Processes,2,Mechanical
+GE19122,Engineering PracticesElectrical and Electronics,2,Mechanical
+MC19102,Indian Constitution and Freedom Movement,2,Mechanical
+MA19355,Transforms and Applications,3,Mechanical
+GE19301,Life Science for Engineers,3,Mechanical
+ME19301,Engineering Thermodynamics,3,Mechanical
+ME19302,Metal cutting and Machine tools,3,Mechanical
+ME19303,Kinematics of Machinery,3,Mechanical
+EE19241,Basic Electrical Engineering,3,Mechanical
+ME19311,Machine Drawing Lab,3,Mechanical
+ME19312,Manufacturing Tech Lab,3,Mechanical
+MA19455,Statistics & Numerical Methods,4,Mechanical
+ME19401,Thermal Engineering,4,Mechanical
+ME19402,Strength of Materials,4,Mechanical
+ME19403,Fluid Mechanics & Machinery,4,Mechanical
+ME19404,Engineering Materials & Metallurgy,4,Mechanical
+GE19303,Economics for Engineers,4,Mechanical
+ME19411,Strength of Materials and Fluid Mechanics and Machinery Laboratory,4,Mechanical
+ME19412,Thermal Engineering Lab - I,4,Mechanical
+GE19421,Soft Skills - I,4,Mechanical
+MC19301,Essence of Indian Traditional knowledge (Non-Credit),4,Mechanical
+ME19501,Design of Machine Elements,5,Mechanical
+ME19502,Heat and Mass Transfer,5,Mechanical
+ME19541,Dynamics of Machines,5,Mechanical
+ME19542,Metrology and Measurements,5,Mechanical
+EC19351,Basic Electronics Engineering,5,Mechanical
+ME111,OPEN ELECTIVE - I,5,Mechanical
+ME19511,CAD/CAM LAB,5,Mechanical
+ME19512,Thermal Engineering Lab-II,5,Mechanical
+GE19521,Soft Skills - II,5,Mechanical
+ME19601,Finite Element Analysis,6,Mechanical
+ME19602,Gas Dynamics and Jet Propulsion,6,Mechanical
+ME19603,Total Quality Management,6,Mechanical
+ME19604,Design of Transmission systems,6,Mechanical
+ME112,Professional Elective-I,6,Mechanical
+ME113,Open Elective - I,6,Mechanical
+GE19621,Problem Solving Techniques,6,Mechanical
+ME19611,Simulation and Analysis Laboratory,6,Mechanical
+ME19612,Innovation and Design thinking for Mechanical Engineer,6,Mechanical
+ME19701,Automobile Engineering,7,Mechanical
+ME19702,Automation in Manufacturing,7,Mechanical
+ME19741,Mechatronics,7,Mechanical
+ME114,Professional Elective II,7,Mechanical
+ME115,Professional Elective III,7,Mechanical
+ME116,Professional Elective IV,7,Mechanical
+ME19711,Project – Phase I,7,Mechanical
+ME19712,Comprehension,7,Mechanical
+ME117,Professional Elective V,8,Mechanical
+ME118,Professional Elective VI,8,Mechanical
+ME19811,Project – Phase II,8,Mechanical
+HS19151,Technical English,1,Computer Science
+MA19152,Linear Algebra and Applied Calculus,1,Computer Science
+CY19143,Applied Chemistry,1,Computer Science
+GE19141,Programming using C,1,Computer Science
+GE19122,Engineering Practices- Electrical and Electronics,1,Computer Science
+MC19102,Indian Constitution and Freedom Movement,1,Computer Science
+MA19252,Differential Equations and Complex Variables,2,Computer Science
+GE19101,Engineering Graphics,2,Computer Science
+PH19241,Physics for Information Science,2,Computer Science
+EE19242,Basic Electrical and Electronics Engineering,2,Computer Science
+CS19241,Data Structures,2,Computer Science
+GE19121,Engineering Practices-Civil and Mechanical,2,Computer Science
+CS19211,Python Programming Lab,2,Computer Science
+MC19101,Environmental Science and Engineering,2,Computer Science
+MA19354,Transforms and Discrete Mathematics,3,Computer Science
+CS19301,Computer Architecture,3,Computer Science
+EC19306,Communication Engineering,3,Computer Science
+CS19341,Design and Analysis of Algorithms,3,Computer Science
+EC19341,Digital Logic and Microprocessor,3,Computer Science
+CS19342,Object Oriented Programming Paradigm,3,Computer Science
+MC19301,Essence of Indian Traditional Knowledge,3,Computer Science
+MA19454,"Probability, Statistics and Queuing Theory",4,Computer Science
+GE19301,Life Science for Engineers,4,Computer Science
+CS19441,Operating Systems,4,Computer Science
+CS19442,Software Engineering Concepts,4,Computer Science
+CS19443,Database Management Systems,4,Computer Science
+GE19421,Soft Skills–I,4,Computer Science
+CS19501,Theory of Computation,5,Computer Science
+CS111,Professional Elective-I,5,Computer Science
+CS112,Open Elective – I,5,Computer Science
+CS19541,Computer Networks,5,Computer Science
+CS19542,Internet Programming,5,Computer Science
+AI19341,Principles of Artificial Intelligence,5,Computer Science
+GE19521,Soft Skills-II,5,Computer Science
+CS19601,Fundamentals of Mobile Computing,6,Computer Science
+BA19602,Fundamentals of Accounting,6,Computer Science
+CS113,Professional Elective-II,6,Computer Science
+CS19641,Compiler Design,6,Computer Science
+CS19642,Cryptography and Network Security,6,Computer Science
+CS19643,Foundations of Machine Learning,6,Computer Science
+CS19611,Mobile Application Development Laboratory,6,Computer Science
+CS19612,Innovative Project Lab for Computer Engineers,6,Computer Science
+GE19621,Problem Solving Techniques,6,Computer Science
+CS114,Professional Elective-III,7,Computer Science
+CS115,Professional Elective-IV,7,Computer Science
+CS116,Professional Elective-V,7,Computer Science
+CS19721,Block Chain Fundamentals,7,Computer Science
+CS19741,Cloud Computing,7,Computer Science
+CS19711,Project-I,7,Computer Science
+CS117,Professional Elective-VI,8,Computer Science
+CS118,Open Elective-II,8,Computer Science
+CS19811,Project-II,8,Computer Science
+HS19151,Technical English,1,Information Technology
+MA19152,Linear Algebra and Applied Calculus,1,Information Technology
+CY19143,Applied Chemistry,1,Information Technology
+GE19141,Programming using C,1,Information Technology
+GE19122,Engineering Practices- Electrical and Electronics,1,Information Technology
+MC19102,Indian Constitution and Freedom Movement,1,Information Technology
+MA19252,Differential Equations and Complex Variables,2,Information Technology
+GE19101,Engineering Graphics,2,Information Technology
+PH19241,Physics for Information Science,2,Information Technology
+EE19242,Basic Electrical and Electronics Engineering,2,Information Technology
+CS19241,Data Structures,2,Information Technology
+GE19121,Engineering Practices-Civil and Mechanical,2,Information Technology
+MC19101,Environmental Science and Engineering,2,Information Technology
+MA19354,Transforms and Discrete Mathematics,3,Information Technology
+IT19301,Digital Electronics,3,Information Technology
+IT19302,Software Engineering Essentials,3,Information Technology
+IT19303,Advanced Data Structures,3,Information Technology
+CS19341,Design and Analysis of Algorithms,3,Information Technology
+IT19341,Introduction to OOP and Java,3,Information Technology
+MC19301,Essence of Indian Traditional Knowledge,3,Information Technology
+MA19454,"Probability, Statistics and Queuing Theory",4,Information Technology
+IT19401,Computer Organization,4,Information Technology
+GE19304,Fundamentals of Management for Engineers,4,Information Technology
+GE19301,Life Science for Engineers,4,Information Technology
+IT19441,Operating System Design,4,Information Technology
+CS19443,Database Management Systems,4,Information Technology
+GE19421,Soft Skills-I,4,Information Technology
+IT19501,Automata Theory & Compiler Design,5,Information Technology
+EC19505,Analog and Digital Communication,5,Information Technology
+IT111,Open Elective –I,5,Information Technology
+IT19541,Web Technology,5,Information Technology
+CS19541,Computer Networks,5,Information Technology
+EC19443,Principles of Microprocessors and Microcontroller,5,Information Technology
+IT19521,Open Source Programming and Tutorial Lab,5,Information Technology
+GE19521,Soft Skills-II,5,Information Technology
+IT112,Professional Elective-I,6,Information Technology
+IT113,Open Elective –II,6,Information Technology
+IT19641,Mobile Communication,6,Information Technology
+IT19642,Cryptography and Information Security,6,Information Technology
+IT19643,Artificial Intelligence and Machine Learning,6,Information Technology
+IT19644,Innovation and Design Thinking for Information Technology,6,Information Technology
+GE19621,Problem Solving Techniques,6,Information Technology
+IT114,Professional Elective-II,7,Information Technology
+IT115,Professional Elective-III,7,Information Technology
+IT19741,Cloud and Big Data Analytics,7,Information Technology
+IT19711,Industry Practices Lab,7,Information Technology
+IT19712,Project Phase I,7,Information Technology
+IT116,Professional Elective-IV,8,Information Technology
+IT117,Professional Elective-V,8,Information Technology
+IT19811,Project Phase II,8,Information Technology
+HS19151,Technical English,1,Automobile
+MA19151,Algebra and Calculus,1,Automobile
+GE19101,Engineering Graphics,1,Automobile
+PH19141,Physics of Materials,1,Automobile
+GE19121,Engineering Practices - Civil and Mechanical,1,Automobile
+MC19101,Environmental Science and Engineering,1,Automobile
+MA19251,Differential Equations and Vector Calculus,2,Automobile
+GE19201,Engineering Mechanics,2,Automobile
+CY19241,Engineering Chemistry,2,Automobile
+GE19141,Programming using C,2,Automobile
+EE19241,Basic Electrical Engineering,2,Automobile
+GE19122,Engineering PracticesElectrical and Electronics,2,Automobile
+MC19102,Indian Constitution and Freedom Movement,2,Automobile
+GE19301,Life Science for Engineers,3,Automobile
+MA19351,Transforms and Statistics,3,Automobile
+AT19341,Applied Thermodynamics,3,Automobile
+AT19342,Automotive Engines,3,Automobile
+AT19343,Strength of Materials for Automobile Engineers,3,Automobile
+EC19351,Basic Electronics Engineering,3,Automobile
+AT19311,Computer Aided Machine Drawing Laboratory,3,Automobile
+MC19301,Essence of Indian Traditional Knowledge,3,Automobile
+GE19304,Fundamentals of Management for Engineers,4,Automobile
+AT19401,Engineering Materials & Metallurgy,4,Automobile
+AT19402,Production Technology - I,4,Automobile
+AT19441,Fluid Mechanics & Machinery for Automobile Engineers,4,Automobile
+AT19442,Automotive Drive Line and Chassis,4,Automobile
+AT19443,Theory of Machines,4,Automobile
+GE19421,Soft Skills - I,4,Automobile
+AT19501,Machine Design,5,Automobile
+AT19502,Electric and Hybrid Vehicles - I,5,Automobile
+AT19541,Automotive Electrical and Electronics,5,Automobile
+AT19542,Production Technology - II,5,Automobile
+ATOE01,Open Elective - I,5,Automobile
+AT002,Professional Elective - I,5,Automobile
+AT19521,Two and Three wheelers Laboratory,5,Automobile
+AT19522,Computer Aided Vehicle Design Data Characteristics Laboratory,5,Automobile
+GE19521,Soft Skills - II,5,Automobile
+AT19601,Electric and Hybrid Vehicles - II,6,Automobile
+AT19641,Automotive System Design,6,Automobile
+AT19642,Automotive Fuels and Lubricants,6,Automobile
+AT19643,Vehicle Dynamics,6,Automobile
+ATOE03,Open Elective - II,6,Automobile
+GE19621,Problem solving techniques,6,Automobile
+AT19611,Design Thinking and Innovation for Automobile Engineers,6,Automobile
+AT19701,Vehicle Management System,7,Automobile
+AT19702,Intelligent Vehicle System,7,Automobile
+ME19741,Mechatronics,7,Automobile
+ATPE02,Professional Elective – II,7,Automobile
+ATPE03,Professional Elective – III,7,Automobile
+AT19721,Vehicle Maintenance Laboratory,7,Automobile
+AT19722,Computer Aided Analysis laboratory,7,Automobile
+AT19723,Technical Seminar / Industrial Training / Comprehension,7,Automobile
+AT19713,Project - Phase I,7,Automobile
+ATPE04,Professional Elective – IV,8,Automobile
+ATPE05,Professional Elective – V,8,Automobile
+AT19811,Project – Phase II,8,Automobile
+HS19151,Technical English,1,Civil
+MA19151,Algebra and Calculus,1,Civil
+GE19101,Engineering Graphics,1,Civil
+PH19141,Physics of Materials,1,Civil
+GE19121,Engineering Practices - Civil and Mechanical,1,Civil
+MC19101,Environmental Science and Engineering,1,Civil
+MA19251,Differential Equations and Vector Calculus,2,Civil
+GE19201,Engineering Mechanics,2,Civil
+CY19241,Engineering Chemistry,2,Civil
+GE19141,Programming using C,2,Civil
+EE19241,Basic Electrical Engineering,2,Civil
+MT19221,Computer Aided Drawing Laboratory,2,Civil
+GE19122,Engineering PracticesElectrical and Electronics,2,Civil
+MC19102,Indian Constitution and Freedom Movement,2,Civil
+MA19355,Transforms and Applications,3,Civil
+CE19301,Engineering Geology,3,Civil
+CE19302,"Construction Materials, Techniques and Practices",3,Civil
+CE19303,Strength of Materials I,3,Civil
+CE19304,Fluid Mechanics,3,Civil
+CE19311,Construction Materials Laboratory,3,Civil
+CE19312,Strength of Materials laboratory,3,Civil
+GE19301,Life Science for Engineers,3,Civil
+MA19451,Numerical Methods,4,Civil
+CE19401,Strength of Materials II,4,Civil
+CE19402,Applied Hydraulic Engineering,4,Civil
+CE19403,Surveying,4,Civil
+CE19411,Surveying Laboratory,4,Civil
+CE19412,Hydraulic Engineering Laboratory,4,Civil
+MC19301,Essence of Indian Traditional Knowledge,4,Civil
+GE19421,Soft Skills I,4,Civil
+CEOE01,Open Elective I,4,Civil
+CE19601,Design of Reinforced Concrete Elements,5,Civil
+CE19602,Traffic and Highway Engineering,5,Civil
+CE19603,Structural Analysis I,5,Civil
+CE19604,Soil Mechanics,5,Civil
+CE19605,Water Supply Engineering,5,Civil
+CE19511,Soil Mechanics Laboratory,5,Civil
+CE19512,Survey Camp*,5,Civil
+GE19521,Soft Skills II,5,Civil
+CEOE02,Open Elective II,5,Civil
+CE19601,Design of Steel Structures,6,Civil
+CE19602,Structural Analysis II,6,Civil
+CE19603,Foundation Engineering,6,Civil
+CE19604,Waste Water Engineering,6,Civil
+CEPE01,Professional Elective I,6,Civil
+CEPE02,Professional Elective II,6,Civil
+CE19612,2 Water and Waste Water Analysis Laboratory,6,Civil
+CE19613,Innovation and Design thinking for Civil Engineers,6,Civil
+CE19614,Highway Engineering Laboratory,6,Civil
+GE19621,Problem solving techniques,6,Civil
+CE19701,Estimation and Quantity Surveying,7,Civil
+CE19702,Water Resources and Irrigation Engineering,7,Civil
+CEPE04,Professional Elective III,7,Civil
+CEPE05,Professional Elective IV,7,Civil
+CE19711,Computer Aided design and Drafting Laboratory,7,Civil
+CE19712,Creative and Innovative Project,7,Civil
+CE19713,Comprehension in Civil Engineering,7,Civil
+CE19801,Construction Economics and Project Management,8,Civil
+CEPE05,Professional Elective V,8,Civil
+CEPE06,Professional Elective VI,8,Civil
+CE19811,Project,8,Civil
+HS19151,Technical English,1,Electronics and Communication
+MA19152,Linear Algebra and Applied Calculus,1,Electronics and Communication
+CY19142,Chemistry for Electronics Engineering,1,Electronics and Communication
+GE19141,Programming using C,1,Electronics and Communication
+MC19102,Indian Constitution and Freedom Movement,1,Electronics and Communication
+GE19122,Engineering Practices (Electrical and Electronics),1,Electronics and Communication
+MA19252,Differential Equations and Complex Variables,2,Electronics and Communication
+PH19242,Physics for Electronics Engineering,2,Electronics and Communication
+GE19101,Engineering Graphics,2,Electronics and Communication
+CS19241,Data Structures,2,Electronics and Communication
+EC19241,Electron Devices,2,Electronics and Communication
+MC19101,Environmental Science and Engineering,2,Electronics and Communication
+MC19101,Engineering Practices (Civil and Mechanical),2,Electronics and Communication
+MA19352,Transforms and Special Functions,3,Electronics and Communication
+EE19241,Basic Electrical Engineering,3,Electronics and Communication
+EC19301,Analog Circuits -I,3,Electronics and Communication
+EC19302,Digital Electronics,3,Electronics and Communication
+EC19303,Signals and Systems,3,Electronics and Communication
+GE19301,Life Science for Engineers,3,Electronics and Communication
+MC19301,Essence of Indian Traditional knowledge,3,Electronics and Communication
+EC19311,Analog and Digital Circuits Laboratory,3,Electronics and Communication
+MA19452,Probability and Random Processes,4,Electronics and Communication
+EC19401,Microprocessors and Microcontrollers,4,Electronics and Communication
+EC19402,Communication Theory,4,Electronics and Communication
+EC19441,Analog Circuits-II,4,Electronics and Communication
+GE19401,Fundamentals of Mechanics,4,Electronics and Communication
+ECOE01,Open Elective-I,4,Electronics and Communication
+EC19411,Microprocessors and Microcontrollers Laboratory,4,Electronics and Communication
+GE19421,Soft Skills-I,4,Electronics and Communication
+EC19501,Digital Signal Processing,5,Electronics and Communication
+EC19502,Control System Engineering,5,Electronics and Communication
+EC19503,EM Waves and Waveguides,5,Electronics and Communication
+EC19504,Digital Communication,5,Electronics and Communication
+ECPE01,Professional Elective-I,5,Electronics and Communication
+ECPE02,Professional Elective-II,5,Electronics and Communication
+EC19511,Digital Signal Processing Laboratory,5,Electronics and Communication
+EC19512,Communication Systems Laboratory,5,Electronics and Communication
+GE19521,Soft Skills-II,5,Electronics and Communication
+EC19601,Antenna Theory,6,Electronics and Communication
+EC19602,Wireless Communication,6,Electronics and Communication
+EC19641,VLSI Design,6,Electronics and Communication
+EC19642,Communication Networks,6,Electronics and Communication
+GE19304,Fundamentals of Management for Engineers,6,Electronics and Communication
+ECOE02,Open Elective-II,6,Electronics and Communication
+GE19621,Problem Solving Techniques,6,Electronics and Communication
+EC19611,Innovation and Design Thinking for Electronics Engineers,6,Electronics and Communication
+EC19701,RF and Microwave Engineering,7,Electronics and Communication
+EC19702,Optical Communication and Networks,7,Electronics and Communication
+EC19703,Embedded Systems,7,Electronics and Communication
+ECPE03,Professional Elective-III,7,Electronics and Communication
+ECPE04,Professional Elective-IV,7,Electronics and Communication
+EC19711,Embedded Laboratory,7,Electronics and Communication
+EC19712,Advanced Communication Systems Laboratory,7,Electronics and Communication
+ECPE05,Professional Elective-V,8,Electronics and Communication
+ECPE06,Professional Elective-VI,8,Electronics and Communication
+EC19811,Project work,8,Electronics and Communication
+HS19151,Technical English,1,Electrical
+MA19152,Linear Algebra and Applied Calculus,1,Electrical
+CY19142,Chemistry for Electronics Engineering,1,Electrical
+GE19141,Programming using C,1,Electrical
+MC19102,Indian Constitution and Freedom Movement,1,Electrical
+GE19122,Engineering PracticesElectrical and Electronics,1,Electrical
+MA19252,Differential Equations and Complex Variables,2,Electrical
+PH19242,Physics for Electronics Engineering,2,Electrical
+GE19101,Engineering Graphics,2,Electrical
+GE19102,Basic Civil and Mechanical Engineering,2,Electrical
+EE19243,Electric Circuits,2,Electrical
+GE19121,Engineering Practices - Civil and Mechanical,2,Electrical
+MC19101,Environmental Science and Engineering (Non Credit course),2,Electrical
+MA19353,Transforms and Numerical Methods,3,Electrical
+EE19301,Electromagnetic Theory,3,Electrical
+EE19302,Electronic Devices and Circuits,3,Electrical
+EE19303,Electrical Machines –I,3,Electrical
+CS19241,Data Structures,3,Electrical
+EE19311,Electrical Machines –I Laboratory,3,Electrical
+EE19312,Electronic Devices and Circuits Laboratory,3,Electrical
+MC19301,Essence of Indian Traditional Knowledge (Non Credit course),3,Electrical
+GE19301,Life Science for Engineers,4,Electrical
+EE19401,Transmission and Distribution,4,Electrical
+EE19402,Electrical Machines - II,4,Electrical
+EE19441,Linear Integrated Circuits and Application,4,Electrical
+EE19442,Digital Logic Circuits,4,Electrical
+GE19303,Economics for Engineers,4,Electrical
+EE19411,Electrical Machines – II Laboratory,4,Electrical
+GE19421,Soft Skills-I,4,Electrical
+EE19501,Power System Analysis,5,Electrical
+EE19502,Power Electronics,5,Electrical
+EE19503,Discrete Time Systems and Signal Processing,5,Electrical
+EE19504,Measurements and Instrumentation,5,Electrical
+EE19505,Control Systems,5,Electrical
+EE19511,Measurements and Instrumentation Laboratory,5,Electrical
+EE19512,Control Systems Laboratory,5,Electrical
+EEOE01,Open Elective - I,5,Electrical
+GE19521,Soft Skills-II,5,Electrical
+EE19601,Protection and Switchgear,6,Electrical
+EE19602,Solid State Drives,6,Electrical
+EE19603,"Microprocessors, Microcontrollers and Applications",6,Electrical
+EE19641,Design of Electrical Machines,6,Electrical
+EEPE01,Professional Elective I,6,Electrical
+EEOE01,Open Elective – II,6,Electrical
+EE19611,Innovation and Design thinking for Electrical Engineers,6,Electrical
+EE19612,Power Electronics and Drives Laboratory,6,Electrical
+EE19613,"Microprocessors, Microcontrollers and Applications Laboratory",6,Electrical
+GE19621,Problem Solving Techniques,6,Electrical
+EE19701,Hybrid Electric Vehicles,7,Electrical
+EE19741,Renewable Energy Systems,7,Electrical
+EE19742,Power System Operation and Control,7,Electrical
+EEPE02,Professional Elective II,7,Electrical
+EEPE03,Professional Elective III,7,Electrical
+EE19711,Project Work / Phase -I,7,Electrical
+EEPE03,Professional Elective IV,8,Electrical
+EEPE04,Professional Elective V,8,Electrical
+EE19811,Project Work/ Phase -II,8,Electrical
