@@ -15,6 +15,7 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 const sendToDb = require("./sendToDb");
+const { log } = require("console");
 
 const dbPath = path.join(__dirname, "timelyy.db");
 
@@ -273,6 +274,64 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
     res.status(402);
     res.send({ err_msg: "Attendance Already Added" });
   }
+});
+
+app.post("/attendance", authenticateToken, async (req, res) => {
+  const { email } = req.payload;
+
+  const getStudentDetailsQuery = `SELECT * FROM student WHERE student_email='${email}';`;
+
+  const { semester, department, student_id } = await db.get(
+    getStudentDetailsQuery
+  );
+
+  const getSubjectListQuery = `SELECT * FROM subject WHERE semester=${semester} AND department="${department}" ORDER BY subject_name ASC;`;
+
+  const subjectList = await db.all(getSubjectListQuery);
+
+  let subjectData = [];
+
+  // Add Student Hour
+  subjectList.forEach(async (subject) => {
+    const query = `SELECT * FROM students_attendance WHERE student_id=${student_id} AND subject_code="${subject.subject_code}";`;
+
+    const data = await db.get(query);
+
+    if (data !== undefined) {
+      subjectData.push({
+        ...subject,
+        student_hours: data.hours,
+      });
+    } else {
+      subjectData.push({
+        ...subject,
+        student_hours: 0,
+      });
+    }
+  });
+
+  let subject_data = [];
+
+  // Add Staff Hour
+  subjectData.forEach(async (subject) => {
+    const query = `SELECT * FROM staffs_attendance WHERE department=${department} AND subject_code="${subject.subject_code}";`;
+
+    const data = await db.get(query);
+
+    if (data !== undefined) {
+      subject_data.push({
+        ...subject,
+        staff_hours: data.taken_hours,
+      });
+    } else {
+      subject_data.push({
+        ...subject,
+        staff_hours: 0,
+      });
+    }
+  });
+
+  res.send({ subjectData: subject_data });
 });
 
 //Testing GET API
