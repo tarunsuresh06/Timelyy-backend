@@ -250,20 +250,31 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
 
   const getStudentDetailsQuery = `SELECT student_name, student_id, semester FROM student WHERE student_email='${email}';`;
 
-  const { student_name, student_id, semester } = await db.get(
-    getStudentDetailsQuery
-  );
+  const getStudentAttendanceQuery = `SELECT time_stamp AS time FROM students_attendance WHERE time_stamp=${time_stamp};`;
 
-  if (parseInt(subject_semester) === semester) {
-    const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
-  VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
+  const { time } = await db.get(getStudentAttendanceQuery);
 
-    const dbResponse = await db.run(createStudentAttendanceQuery);
+  console.log(time);
 
-    res.send({ lastID: dbResponse.lastID });
+  if (time === undefined) {
+    const { student_name, student_id, semester } = await db.get(
+      getStudentDetailsQuery
+    );
+
+    if (parseInt(subject_semester) === semester) {
+      const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
+    VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
+
+      const dbResponse = await db.run(createStudentAttendanceQuery);
+
+      res.send({ lastID: dbResponse.lastID });
+    } else {
+      res.status(402);
+      res.send({ err_msg: "Invalid Attendance" });
+    }
   } else {
     res.status(402);
-    res.send({ err_msg: "Invalid Attendance" });
+    res.send({ err_msg: "Attendance Already Added" });
   }
 });
 
