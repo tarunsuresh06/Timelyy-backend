@@ -254,10 +254,7 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
     getStudentDetailsQuery
   );
 
-  console.log(typeof subject_semester);
-  console.log(typeof semester);
-
-  if (subject_semester === semester) {
+  if (parseInt(subject_semester) == semester) {
     const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
   VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
 
