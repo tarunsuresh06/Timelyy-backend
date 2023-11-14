@@ -331,6 +331,8 @@ app.post("/attendance", authenticateToken, async (req, res) => {
     }
   });
 
+  log(subject_data);
+
   res.send({ subjectData: subject_data });
 });
 
