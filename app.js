@@ -254,6 +254,9 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
     getStudentDetailsQuery
   );
 
+  console.log(subject_semester);
+  console.log(semester);
+
   if (subject_semester === semester) {
     const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
   VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
@@ -270,7 +273,7 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
 //Testing GET API
 app.get("/", async (req, res) => {
   getAllUsersQuery = `
-    SELECT * FROM staffs_attendance;
+    SELECT * FROM student;
   `;
 
   const userArray = await db.all(getAllUsersQuery);
