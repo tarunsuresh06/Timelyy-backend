@@ -249,13 +249,13 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
 
   const getStudentDetailsQuery = `SELECT student_name, student_id, semester FROM student WHERE student_email='${email}';`;
 
-  const getStudentAttendanceQuery = `SELECT time_stamp AS time FROM students_attendance WHERE time_stamp=${time_stamp};`;
+  const getStudentAttendanceQuery = `SELECT * FROM students_attendance WHERE time_stamp=${time_stamp};`;
 
-  const { time } = await db.get(getStudentAttendanceQuery);
+  const studentAttendance = await db.get(getStudentAttendanceQuery);
 
-  console.log(time);
+  const timeStamp = studentAttendance.time_stamp;
 
-  if (time === undefined) {
+  if (timeStamp === undefined) {
     const { student_name, student_id, semester } = await db.get(
       getStudentDetailsQuery
     );
