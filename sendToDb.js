@@ -1,8 +1,8 @@
 const csv = require("csvtojson");
 const path = require("path");
 
-const sendToDb = () => {
-  const csvFilePath = path.join(__dirname, "subject_data.csv");
+const sendToDb = (data) => {
+  const csvFilePath = path.join(__dirname, data);
   return csv()
     .fromFile(csvFilePath)
     .subscribe((json) => {

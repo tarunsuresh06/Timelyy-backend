@@ -94,8 +94,8 @@ app.post("/register", async (req, res) => {
         addUserDetailsQuery = `INSERT INTO student(student_name, roll_number, student_email, semester, department)
         VALUES ('${name}', '${unique_no}', '${email}', ${semester}, '${department}');`;
       } else {
-        addUserDetailsQuery = `INSERT INTO staff(staff_name, employee_number, staff_email, semester, department)
-        VALUES ('${name}', '${unique_no}', '${email}', ${semester}, '${department}');`;
+        addUserDetailsQuery = `INSERT INTO staff(staff_name, employee_number, staff_email, department)
+        VALUES ('${name}', '${unique_no}', '${email}', '${department}');`;
       }
 
       const dbResponse = await db.run(createUserQuery);
@@ -167,7 +167,7 @@ app.get("/profile/staff", authenticateToken, async (req, res) => {
 // Add Subject data from CSV to Database API
 app.get("/csvtojson", async (req, res) => {
   let sub_data = null;
-  await sendToDb()
+  await sendToDb("subject_data.csv")
     .then((data) => {
       // res.json(data);
       sub_data = data;
@@ -261,7 +261,7 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
 
     if (parseInt(subject_semester) === semester) {
       const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
-    VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
+      VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
 
       const dbResponse = await db.run(createStudentAttendanceQuery);
 
@@ -276,7 +276,7 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
   }
 });
 
-app.post("/attendance", authenticateToken, async (req, res) => {
+app.get("/attendance", authenticateToken, async (req, res) => {
   const { email } = req.payload;
 
   const getStudentDetailsQuery = `SELECT * FROM student WHERE student_email='${email}';`;
@@ -289,59 +289,96 @@ app.post("/attendance", authenticateToken, async (req, res) => {
 
   const subjectList = await db.all(getSubjectListQuery);
 
-  let subjectData = [];
+  // Add Student Hours
+  const studentUpdatedList = await Promise.all(
+    subjectList.map(async (subject) => {
+      const query = `SELECT sum(hours) AS student_hour FROM students_attendance WHERE student_id=${student_id} GROUP BY subject_code HAVING subject_code="${subject.subject_code}";`;
 
-  // Add Student Hour
-  subjectList.forEach(async (subject) => {
-    const query = `SELECT * FROM students_attendance WHERE student_id=${student_id} AND subject_code="${subject.subject_code}";`;
+      const data = await db.get(query);
 
-    const data = await db.get(query);
+      if (data !== undefined) {
+        return {
+          ...subject,
+          student_hours: data.student_hour,
+        };
+      } else {
+        return {
+          ...subject,
+          student_hours: 0,
+        };
+      }
+    })
+  );
 
-    if (data !== undefined) {
-      subjectData.push({
-        ...subject,
-        student_hours: data.hours,
-      });
-    } else {
-      subjectData.push({
-        ...subject,
-        student_hours: 0,
-      });
-    }
-  });
+  // ADD Staff Hours
+  const staffUpdatedList = await Promise.all(
+    studentUpdatedList.map(async (subject) => {
+      const query = `SELECT sum(taken_hours) AS staff_hour FROM staffs_attendance WHERE department="${department}" GROUP BY subject_code HAVING subject_code="${subject.subject_code}";`;
 
-  let subject_data = [];
+      const data = await db.get(query);
 
-  // Add Staff Hour
-  subjectData.forEach(async (subject) => {
-    const query = `SELECT * FROM staffs_attendance WHERE department=${department} AND subject_code="${subject.subject_code}";`;
+      if (data !== undefined) {
+        return {
+          ...subject,
+          staff_hours: data.staff_hour,
+        };
+      } else {
+        return {
+          ...subject,
+          staff_hours: 0,
+        };
+      }
+    })
+  );
 
-    const data = await db.get(query);
-
-    if (data !== undefined) {
-      subject_data.push({
-        ...subject,
-        staff_hours: data.taken_hours,
-      });
-    } else {
-      subject_data.push({
-        ...subject,
-        staff_hours: 0,
-      });
-    }
-  });
-
-  log(subject_data);
-
-  res.send({ subjectData: subject_data });
+  res.send({ attendanceData: staffUpdatedList });
 });
 
 //Testing GET API
 app.get("/", async (req, res) => {
-  getAllUsersQuery = `
-    SELECT * FROM student;
+  const getAllUsersQuery = `
+    SELECT * FROM students_attendance;
   `;
 
   const userArray = await db.all(getAllUsersQuery);
   res.send(userArray);
+});
+
+// Testing API
+app.get("/add-student-attendance", async (req, res) => {
+  let sub_data = null;
+  await sendToDb("staff.csv")
+    .then((data) => {
+      // res.json(data);
+      sub_data = data;
+      console.log(data);
+    })
+    .catch((err) => {
+      // res.json({ error: err });
+      console.log(err);
+    });
+
+  sub_data.forEach(async (element) => {
+    var time_stamp = element.time_stamp,
+      staff_id = element.staff_id,
+      staff_name = element.staff_name,
+      subject_code = element.subject_code,
+      subject_name = element.subject_name,
+      semester = element.semester,
+      department = element.department,
+      taken_hours = element.taken_hours;
+
+    const addAttendanceQuery = `INSERT INTO staffs_attendance(time_stamp, staff_id, staff_name, subject_code, subject_name, semester, department, taken_hours) 
+    VALUES(${time_stamp}, ${staff_id}, "${staff_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
+
+    const checkQuery = `SELECT * FROM staffs_attendance WHERE time_stamp = "${time_stamp}";`;
+
+    const subject = await db.get(checkQuery);
+
+    if (subject === undefined) {
+      await db.run(addAttendanceQuery);
+    }
+  });
+
+  res.send({ status: "success" });
 });
