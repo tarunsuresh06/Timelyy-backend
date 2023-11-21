@@ -1,21 +1,20 @@
 const express = require("express");
 const path = require("path");
-
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
 const app = express();
-
 app.use(express.json());
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const cors = require("cors");
-app.use(cors({ origin: true }));
-
-const bcrypt = require("bcrypt");
-
-const jwt = require("jsonwebtoken");
-const sendToDb = require("./sendToDb");
 const { log } = require("console");
+app.use(cors({ origin: true }));
 
 const dbPath = path.join(__dirname, "timelyy.db");
 
@@ -113,27 +112,32 @@ app.post("/register", async (req, res) => {
 
 // User Login API
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, userType } = req.body;
 
   const getUserQuery = `SELECT * FROM user WHERE email = '${email}';`;
 
   const userDetails = await db.get(getUserQuery);
 
-  if (userDetails === undefined) {
-    res.status(400);
-    res.send({ error_msg: "Invalid Username" });
-  } else {
-    const isPasswordMatched = await bcrypt.compare(
-      password,
-      userDetails.password
-    );
-    if (isPasswordMatched === true) {
-      const jwtToken = jwt.sign(userDetails, "ADMIN_123");
-      res.send({ jwtToken });
-    } else {
+  if (userType === userDetails.user_type) {
+    if (userDetails === undefined) {
       res.status(400);
-      res.send({ error_msg: "Invalid Password" });
+      res.send({ error_msg: "Invalid Username" });
+    } else {
+      const isPasswordMatched = await bcrypt.compare(
+        password,
+        userDetails.password
+      );
+      if (isPasswordMatched === true) {
+        const jwtToken = jwt.sign(userDetails, "ADMIN_123");
+        res.send({ jwtToken });
+      } else {
+        res.status(400);
+        res.send({ error_msg: "Invalid Password" });
+      }
     }
+  } else {
+    res.status(400);
+    res.send({ error_msg: `Invalid ${userType}` });
   }
 });
 
@@ -162,41 +166,6 @@ app.get("/profile/staff", authenticateToken, async (req, res) => {
 
   const staffData = await db.get(getStaffDataQuery);
   res.send({ staffData });
-});
-
-// Add Subject data from CSV to Database API
-app.get("/csvtojson", async (req, res) => {
-  let sub_data = null;
-  await sendToDb("subject_data.csv")
-    .then((data) => {
-      // res.json(data);
-      sub_data = data;
-      console.log(data);
-    })
-    .catch((err) => {
-      // res.json({ error: err });
-      console.log(err);
-    });
-
-  sub_data.forEach(async (element) => {
-    var subject_code = element.subject_code,
-      subject_name = element.subject_name,
-      semester = element.semester,
-      department = element.department;
-
-    const addSubjectQuery = `
-    INSERT INTO subject(subject_code,subject_name,semester,department) VALUES("${subject_code}", "${subject_name}", "${semester}", "${department}");`;
-
-    const checkSubjectQuery = `SELECT * FROM subject WHERE subject_code = "${subject_code}";`;
-
-    const subject = await db.get(checkSubjectQuery);
-
-    if (subject === undefined) {
-      await db.run(addSubjectQuery);
-    }
-  });
-
-  res.send({ status: "success" });
 });
 
 // GET Subject List to Generate QR API
@@ -334,51 +303,49 @@ app.get("/attendance", authenticateToken, async (req, res) => {
   res.send({ attendanceData: staffUpdatedList });
 });
 
+app.post(
+  "/upload-pdf",
+  upload.single("pdf"),
+  authenticateToken,
+  async (req, res) => {
+    try {
+      const { name, department } = req.body;
+
+      if (!name || !department) {
+        return res
+          .status(400)
+          .json({ error: "Name and department are required." });
+      }
+
+      const pdfData = req.file.buffer.toString("base64");
+      await db.run(
+        "INSERT INTO pdf_data (name, department, data) VALUES (?, ?, ?)",
+        [name, department, pdfData]
+      );
+      res.sendStatus(200);
+    } catch (error) {
+      console.error("Error uploading PDF:", error);
+      res.sendStatus(500);
+    }
+  }
+);
+
+app.get("/pdf-data", async (req, res) => {
+  try {
+    const result = await db.all("SELECT name, department, data FROM pdf_data");
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching PDFs:", error);
+    res.sendStatus(500);
+  }
+});
+
 //Testing GET API
 app.get("/", async (req, res) => {
   const getAllUsersQuery = `
-    SELECT * FROM students_attendance;
+    SELECT * FROM pdf_data;
   `;
 
   const userArray = await db.all(getAllUsersQuery);
   res.send(userArray);
-});
-
-// Testing API
-app.get("/add-student-attendance", async (req, res) => {
-  let sub_data = null;
-  await sendToDb("staff.csv")
-    .then((data) => {
-      // res.json(data);
-      sub_data = data;
-      console.log(data);
-    })
-    .catch((err) => {
-      // res.json({ error: err });
-      console.log(err);
-    });
-
-  sub_data.forEach(async (element) => {
-    var time_stamp = element.time_stamp,
-      staff_id = element.staff_id,
-      staff_name = element.staff_name,
-      subject_code = element.subject_code,
-      subject_name = element.subject_name,
-      semester = element.semester,
-      department = element.department,
-      taken_hours = element.taken_hours;
-
-    const addAttendanceQuery = `INSERT INTO staffs_attendance(time_stamp, staff_id, staff_name, subject_code, subject_name, semester, department, taken_hours) 
-    VALUES(${time_stamp}, ${staff_id}, "${staff_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
-
-    const checkQuery = `SELECT * FROM staffs_attendance WHERE time_stamp = "${time_stamp}";`;
-
-    const subject = await db.get(checkQuery);
-
-    if (subject === undefined) {
-      await db.run(addAttendanceQuery);
-    }
-  });
-
-  res.send({ status: "success" });
 });
