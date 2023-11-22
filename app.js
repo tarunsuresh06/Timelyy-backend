@@ -4,6 +4,7 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 const multer = require("multer");
 
 const app = express();
@@ -13,7 +14,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const cors = require("cors");
-const { log } = require("console");
 app.use(cors({ origin: true }));
 
 const dbPath = path.join(__dirname, "timelyy.db");
@@ -118,7 +118,7 @@ app.post("/login", async (req, res) => {
 
   const userDetails = await db.get(getUserQuery);
 
-  if (userType === userDetails.user_type) {
+  if (userType === userDetails.user_type || userDetails.user_type === "admin") {
     if (userDetails === undefined) {
       res.status(400);
       res.send({ error_msg: "Invalid Username" });
@@ -309,18 +309,18 @@ app.post(
   authenticateToken,
   async (req, res) => {
     try {
-      const { name, department } = req.body;
+      const { id, name, department } = req.body;
 
-      if (!name || !department) {
+      if (!name || !department || !id) {
         return res
           .status(400)
-          .json({ error: "Name and department are required." });
+          .json({ error: "id, Name and department are required." });
       }
 
       const pdfData = req.file.buffer.toString("base64");
       await db.run(
-        "INSERT INTO pdf_data (name, department, data) VALUES (?, ?, ?)",
-        [name, department, pdfData]
+        "INSERT INTO pdf_data (id, name, department, data) VALUES (?, ?, ?, ?)",
+        [id, name, department, pdfData]
       );
       res.sendStatus(200);
     } catch (error) {
@@ -332,7 +332,95 @@ app.post(
 
 app.get("/pdf-data", async (req, res) => {
   try {
-    const result = await db.all("SELECT name, department, data FROM pdf_data");
+    const result = await db.all(
+      "SELECT id, name, department, data FROM pdf_data"
+    );
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching PDFs:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.delete("/delete-pdf/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await db.run(`DELETE FROM pdf_data WHERE id="${id}";`);
+    res.json(result);
+  } catch (error) {
+    console.error("Error Deleting PDFs:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.post(
+  "/upload-time-table",
+  upload.single("pdf"),
+  authenticateToken,
+  async (req, res) => {
+    try {
+      const { email } = req.payload;
+
+      const { department } = await db.get(
+        `SELECT * FROM staff WHERE staff_email="${email}"`
+      );
+
+      if (!email || !department) {
+        return res
+          .status(400)
+          .json({ error: "Email and department are required." });
+      }
+
+      const pdfData = req.file.buffer.toString("base64");
+      await db.run(
+        `UPDATE time_table SET data="${pdfData}" WHERE department='${department}';`
+      );
+      res.sendStatus(200);
+    } catch (error) {
+      console.error("Error uploading PDF:", error);
+      res.sendStatus(500);
+    }
+  }
+);
+
+app.get("/time-table", authenticateToken, async (req, res) => {
+  const { email, user_type } = req.payload;
+
+  const { department } = await db.get(
+    `SELECT * FROM ${user_type} WHERE ${user_type}_email="${email}"`
+  );
+
+  try {
+    const result = await db.get(
+      `SELECT * FROM time_table WHERE department="${department}";`
+    );
+    res.json(result);
+  } catch (error) {
+    console.error("Error fetching PDFs:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.post(
+  "/upload-calender",
+  upload.single("pdf"),
+  authenticateToken,
+  async (req, res) => {
+    try {
+      const pdfData = req.file.buffer.toString("base64");
+      await db.run(`UPDATE calender SET data="${pdfData}" WHERE id=1;`);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error("Error uploading PDF:", error);
+      res.sendStatus(500);
+    }
+  }
+);
+
+app.get("/calender", authenticateToken, async (req, res) => {
+  try {
+    const result = await db.get(`SELECT * FROM calender WHERE id=1;`);
     res.json(result);
   } catch (error) {
     console.error("Error fetching PDFs:", error);
@@ -343,7 +431,7 @@ app.get("/pdf-data", async (req, res) => {
 //Testing GET API
 app.get("/", async (req, res) => {
   const getAllUsersQuery = `
-    SELECT * FROM pdf_data;
+    SELECT * FROM calender;
   `;
 
   const userArray = await db.all(getAllUsersQuery);
