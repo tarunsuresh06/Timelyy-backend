@@ -304,57 +304,6 @@ app.get("/attendance", authenticateToken, async (req, res) => {
 });
 
 app.post(
-  "/upload-pdf",
-  upload.single("pdf"),
-  authenticateToken,
-  async (req, res) => {
-    try {
-      const { id, name, department } = req.body;
-
-      if (!name || !department || !id) {
-        return res
-          .status(400)
-          .json({ error: "id, Name and department are required." });
-      }
-
-      const pdfData = req.file.buffer.toString("base64");
-      await db.run(
-        "INSERT INTO pdf_data (id, name, department, data) VALUES (?, ?, ?, ?)",
-        [id, name, department, pdfData]
-      );
-      res.sendStatus(200);
-    } catch (error) {
-      console.error("Error uploading PDF:", error);
-      res.sendStatus(500);
-    }
-  }
-);
-
-app.get("/pdf-data", async (req, res) => {
-  try {
-    const result = await db.all(
-      "SELECT id, name, department, data FROM pdf_data"
-    );
-    res.json(result);
-  } catch (error) {
-    console.error("Error fetching PDFs:", error);
-    res.sendStatus(500);
-  }
-});
-
-app.delete("/delete-pdf/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const result = await db.run(`DELETE FROM pdf_data WHERE id="${id}";`);
-    res.json(result);
-  } catch (error) {
-    console.error("Error Deleting PDFs:", error);
-    res.sendStatus(500);
-  }
-});
-
-app.post(
   "/upload-time-table",
   upload.single("pdf"),
   authenticateToken,
@@ -437,3 +386,54 @@ app.get("/", async (req, res) => {
   const userArray = await db.all(getAllUsersQuery);
   res.send(userArray);
 });
+
+// app.post(
+//   "/upload-pdf",
+//   upload.single("pdf"),
+//   authenticateToken,
+//   async (req, res) => {
+//     try {
+//       const { id, name, department } = req.body;
+
+//       if (!name || !department || !id) {
+//         return res
+//           .status(400)
+//           .json({ error: "id, Name and department are required." });
+//       }
+
+//       const pdfData = req.file.buffer.toString("base64");
+//       await db.run(
+//         "INSERT INTO pdf_data (id, name, department, data) VALUES (?, ?, ?, ?)",
+//         [id, name, department, pdfData]
+//       );
+//       res.sendStatus(200);
+//     } catch (error) {
+//       console.error("Error uploading PDF:", error);
+//       res.sendStatus(500);
+//     }
+//   }
+// );
+
+// app.get("/pdf-data", async (req, res) => {
+//   try {
+//     const result = await db.all(
+//       "SELECT id, name, department, data FROM pdf_data"
+//     );
+//     res.json(result);
+//   } catch (error) {
+//     console.error("Error fetching PDFs:", error);
+//     res.sendStatus(500);
+//   }
+// });
+
+// app.delete("/delete-pdf/:id", async (req, res) => {
+//   const { id } = req.params;
+
+//   try {
+//     const result = await db.run(`DELETE FROM pdf_data WHERE id="${id}";`);
+//     res.json(result);
+//   } catch (error) {
+//     console.error("Error Deleting PDFs:", error);
+//     res.sendStatus(500);
+//   }
+// });
