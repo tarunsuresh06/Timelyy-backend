@@ -118,26 +118,21 @@ app.post("/login", async (req, res) => {
 
   const userDetails = await db.get(getUserQuery);
 
-  if (userType === userDetails.user_type || userDetails.user_type === "admin") {
-    if (userDetails === undefined) {
-      res.status(400);
-      res.send({ error_msg: "Invalid Username" });
-    } else {
-      const isPasswordMatched = await bcrypt.compare(
-        password,
-        userDetails.password
-      );
-      if (isPasswordMatched === true) {
-        const jwtToken = jwt.sign(userDetails, "ADMIN_123");
-        res.send({ jwtToken });
-      } else {
-        res.status(400);
-        res.send({ error_msg: "Invalid Password" });
-      }
-    }
-  } else {
+  if (userDetails === undefined) {
     res.status(400);
-    res.send({ error_msg: `Invalid ${userType}` });
+    res.send({ error_msg: "Invalid Username" });
+  } else {
+    const isPasswordMatched = await bcrypt.compare(
+      password,
+      userDetails.password
+    );
+    if (isPasswordMatched === true) {
+      const jwtToken = jwt.sign(userDetails, "ADMIN_123");
+      res.send({ jwtToken });
+    } else {
+      res.status(400);
+      res.send({ error_msg: "Invalid Password" });
+    }
   }
 });
 
