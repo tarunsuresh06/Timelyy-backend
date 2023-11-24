@@ -122,16 +122,21 @@ app.post("/login", async (req, res) => {
     res.status(400);
     res.send({ error_msg: "Invalid Username" });
   } else {
-    const isPasswordMatched = await bcrypt.compare(
-      password,
-      userDetails.password
-    );
-    if (isPasswordMatched === true) {
-      const jwtToken = jwt.sign(userDetails, "ADMIN_123");
-      res.send({ jwtToken });
+    if (userType === userDetails.user_type) {
+      const isPasswordMatched = await bcrypt.compare(
+        password,
+        userDetails.password
+      );
+      if (isPasswordMatched === true) {
+        const jwtToken = jwt.sign(userDetails, "ADMIN_123");
+        res.send({ jwtToken });
+      } else {
+        res.status(400);
+        res.send({ error_msg: "Invalid Password" });
+      }
     } else {
       res.status(400);
-      res.send({ error_msg: "Invalid Password" });
+      res.send({ error_msg: `Invalid ${userType}` });
     }
   }
 });
@@ -212,18 +217,23 @@ app.post("/student-attendance", authenticateToken, async (req, res) => {
   } = req.body;
   const { email } = req.payload;
 
-  const getStudentDetailsQuery = `SELECT student_name, student_id, semester FROM student WHERE student_email='${email}';`;
+  const attendanceDepartment = department;
+
+  const getStudentDetailsQuery = `SELECT student_name, student_id, semester, department FROM student WHERE student_email='${email}';`;
 
   const getStudentAttendanceQuery = `SELECT * FROM students_attendance WHERE time_stamp=${time_stamp};`;
 
   const studentAttendance = await db.get(getStudentAttendanceQuery);
 
   if (studentAttendance === undefined) {
-    const { student_name, student_id, semester } = await db.get(
+    const { student_name, student_id, semester, department } = await db.get(
       getStudentDetailsQuery
     );
 
-    if (parseInt(subject_semester) === semester) {
+    if (
+      parseInt(subject_semester) === semester &&
+      attendanceDepartment === department // Check it --------------------------------->
+    ) {
       const createStudentAttendanceQuery = `INSERT INTO students_attendance(time_stamp, student_id, student_name, subject_code, subject_name, semester, department, hours) 
       VALUES(${time_stamp}, ${student_id}, "${student_name}", "${subject_code}", "${subject_name}", ${semester}, "${department}", ${taken_hours});`;
 
@@ -375,7 +385,7 @@ app.get("/calender", authenticateToken, async (req, res) => {
 //Testing GET API
 app.get("/", async (req, res) => {
   const getAllUsersQuery = `
-    SELECT * FROM calender;
+    SELECT * FROM staff;
   `;
 
   const userArray = await db.all(getAllUsersQuery);
